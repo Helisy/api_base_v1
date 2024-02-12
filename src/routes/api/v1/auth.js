@@ -9,7 +9,6 @@ const database = require('../../../database');
 const db = database();
 
 const bcrypt = require('bcrypt');
-const { verify } = require('jsonwebtoken');
 
 const { apiServerError } = require('../../../helpers/apiErrorHandler');
 

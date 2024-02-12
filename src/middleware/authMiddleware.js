@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const { verify } = require('jsonwebtoken');
 
-
 //Verifies if the the acessToken in the cookies is valid.
 const validateToken = (req, res, next) => {
     let acessToken = req.cookies.accessToken || req.headers['Authorization'] ;
@@ -11,9 +10,10 @@ const validateToken = (req, res, next) => {
 
     if(acessToken.includes("Bearer")) acessToken = acessToken.split(" ")[1];
 
-    verify(acessToken, process.env.ACCESS_TOKEN_SECRETE, (err, user) =>{
+    verify(acessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) =>{
 
         if(err){
+            console.log(err)
             const message = err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message;
             return res.status(401).json({
                 method: req.method,
